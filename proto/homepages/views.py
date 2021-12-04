@@ -43,7 +43,7 @@ def register(request):
         )
         email_obj.content_subtype = "html"
         email_obj.attach(filename, file.file.read())
-        confirmation_text = "Registration success! You should receive an email in the next couple of weeks. If not, please try again or contact us at sgs.aether@aol.com."
+        confirmation_text = "Registration success! You should receive an email in the next couple of weeks. If not, please try again or contact us at aethersgs@gmail.com."
         confirmation_email = EmailMessage(
             'Registration attempt made',
             confirmation_text,
