@@ -1,3 +1,4 @@
+import django.utils.datastructures
 from django.shortcuts import render
 from django.core.mail import EmailMessage
 # Create your views here.
@@ -16,11 +17,15 @@ def login(request):
 
 def register(request):
     if request.method == "POST":
-        email = request.form['txtEmail']
-        school = request.form["txtSch"]
+        email = request.POST['txtEmail']
+        print(email)
+        school = request.POST["txtSch"]
         file = request.FILES["fileAuthentication"]
         filename = file.name
-        notes = request.form["txtNotes"]
+        try:
+            notes = request.POST["txtNotes"]
+        except django.utils.datastructures.MultiValueDictKeyError:
+            notes = ""
         if file.size > 25165824:
             return render(request, "homepages/signup.html", {
                 "errormessage": "File too large! Maximum upload of 24MB",
@@ -34,21 +39,22 @@ def register(request):
             'Registration attempt',
             body_text,
             'sgs.aether@aol.com',
-            'sgs.aether@aol.com',
+            ['sgs.aether@aol.com'],
         )
         email_obj.content_subtype = "html"
-        email_obj.attach(filename, file)
+        email_obj.attach(filename, file.file.read())
         confirmation_text = "Registration success! You should receive an email in the next couple of weeks. If not, please try again or contact us at sgs.aether@aol.com."
         confirmation_email = EmailMessage(
             'Registration attempt made',
             confirmation_text,
-            'sgs.aether@aol.com',
-            email,
+            'aethersgs@gmail.com',
+            [email],
         )
         try:
             confirmation_email.send()
             email_obj.send()
-        except:
+        except Exception as e:
+            print(e)
             return render(request, "homepages/signup.html", {
                 "errormessage": "An unknown error has occurred. :(",
                 "successmessage": ""

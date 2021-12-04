@@ -135,9 +135,11 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 django_heroku.settings(locals())
 
-EMAIL_HOST = "smtp.aol.com"
-EMAIL_PORT = 465
-EMAIL_HOST_USER = "sgs.aether@aol.com"
-EMAIL_HOST_PASSWORD = "aetherIsTheBestName"
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = "aethersgs@gmail.com"
+EMAIL_HOST_PASSWORD = "@etherIsTheB3st"
+DEFAULT_FROM_EMAIL = 'aethersgs@gmail.com'
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
