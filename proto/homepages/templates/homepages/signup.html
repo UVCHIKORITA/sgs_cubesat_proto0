@@ -1,0 +1,30 @@
+{% extends 'homepages/layout.html' %}
+{% block title %}
+  Sign up
+{% endblock %}
+{% block body %}
+  <div class="container">
+    <form method="post" enctype="multipart/form-data" action="/register">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="txtEmail" >Email address</label>
+        <input name="txtEmail" type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
+      </div>
+      <div class="form-group">
+        <label for="txtSch">School name</label>
+        <input name="txtSch" type="text" class="form-control" id="txtSch" placeholder="School name" required>
+      </div>
+      <div class="form-group">
+        <label for="FileAuthentication">Upload signed document with school name, date, signature clearly visible (max size 24 MB):</label>
+        <input name="fileAuthentication" type="file" class="form-control-file" id="FileAuthentication" required>
+      </div>
+      <<div class="form-group">
+        <label for="txtNotes">Any additional notes?</label>
+        <textarea class="form-control" id="txtNotes" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <small id="errorMsg" class="form-text text-muted" style="color:red">{{errormessage}}</small>
+      <small id="successMsg" class="form-text text-muted" style="color:green">{{successmessage}}</small>
+    </form>
+  </div>
+{% endblock %}
