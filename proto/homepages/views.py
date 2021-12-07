@@ -10,7 +10,15 @@ def index(request):
 
 def login(request):
     if request.method == "POST":
-        pass
+        try:
+            email = request.POST['txtEmail']
+            password = request.POST['txtPwd']
+            
+        except Exception as e:
+            return render(request, "homepages/signup.html", {
+                "errormessage": e,
+                "successmessage": ""
+            })
     elif request.method == "GET":
         return render(request, "homepages/signin.html")
 
